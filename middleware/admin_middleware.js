@@ -13,10 +13,14 @@ const admin = async (req, res, next) => {
       return req
         .status(401)
         .json({ message: "Token verification failed.Access denied." });
-    const user = await User.findById(isVerified.id);
+    const user = await User.findById(isveriifed.id);
+
     if (user.type == "user" || user.type == "seller") {
       return res.status(401).json({ message: "You are not admin!" });
     }
+    req.user = isveriifed.id;
+    req.token = token;
+    next();
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
