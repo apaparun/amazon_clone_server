@@ -6,7 +6,7 @@ require("dotenv").config();
 //import from another files
 const authRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin");
-
+const productRouter = require("./routes/products");
 //init
 const PORT = 3000;
 const app = express();
@@ -16,7 +16,7 @@ const DB = `mongodb+srv://${process.env.mDBUserName}:${process.env.mDBPassword}@
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
-
+app.use(productRouter);
 //db connection
 mongoose
   .connect(DB)
